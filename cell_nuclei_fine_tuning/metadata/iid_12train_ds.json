@@ -1,0 +1,3 @@
+{"train": ["EPL4", "GC2", "GL6", "MCL4","EPL2", "EPL3", "GC3", "GC4", "GL9", "GL2", "MCL6", "MCL7"], 
+"validation": ["EPL5", "GC1", "GL3", "MCL9"],
+"test": ["EPL1","GC5","GL8","MCL8"]}

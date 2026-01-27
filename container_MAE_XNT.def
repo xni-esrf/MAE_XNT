@@ -1,0 +1,49 @@
+BootStrap: docker
+From:nvidia/cuda:12.6.0-devel-ubuntu24.04
+%environment
+    LANG=en_US.UTF-8
+    LC_ALL=en_US.UTF-8
+%post
+    
+    # Update and Upgrade base system
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get -y update
+    apt-get -y full-upgrade
+
+    # Install locales
+    apt-get install -y locales
+    sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+    dpkg-reconfigure --frontend=noninteractive locales && update-locale LANG=en_US.UTF-8
+    
+    apt-get install -y libboost-dev
+    apt-get install -y python3 python3-pip python3-dev python3-venv
+    apt-get install -y python3-setuptools git wget curl vim bc man screen nano
+    apt-get install -y python3-pip --upgrade
+
+    pip3 install --break-system-packages cython==3.1.5
+    pip3 install --break-system-packages numpy==2.3.2
+    pip3 install --break-system-packages --no-build-isolation git+https://github.com/funkey/waterz.git@bf6e093
+    pip3 install --break-system-packages torch==2.7.1 --index-url https://download.pytorch.org/whl/cu126
+    pip3 install --break-system-packages torchvision==0.23.0 --index-url https://download.pytorch.org/whl/cu126
+    pip3 install --break-system-packages scipy==1.16.1
+    pip3 install --break-system-packages matplotlib==3.10.5
+    pip3 install --break-system-packages pillow==11.3.0
+    pip3 install --break-system-packages tifffile==2025.6.11
+    pip3 install --break-system-packages tqdm==4.67.1
+    pip3 install --break-system-packages monai==1.5.0
+    pip3 install --break-system-packages einops==0.8.0
+    pip3 install --break-system-packages webknossos==2.4.10
+    pip3 install --break-system-packages h5py==3.14.0
+    pip3 install --break-system-packages timm==1.0.19
+    pip3 install --break-system-packages scikit-image==0.25.2
+    pip3 install --break-system-packages neuroglancer==2.40.1
+    pip3 install --break-system-packages networkx==3.5
+    pip3 install --break-system-packages zarr==3.1.2
+    pip3 install --break-system-packages pandas==2.3.2
+
+    # Cleanup
+    apt autoremove -y --purge
+    apt autoclean -y
+
+%runscript
+    exec $@

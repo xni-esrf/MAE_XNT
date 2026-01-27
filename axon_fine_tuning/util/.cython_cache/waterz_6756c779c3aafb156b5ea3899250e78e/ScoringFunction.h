@@ -1,0 +1,1 @@
+typedef OneMinus<MeanAffinity<RegionGraphType, ScoreValue>> ScoringFunctionType;

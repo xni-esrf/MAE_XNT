@@ -1,0 +1,1 @@
+template<typename T, typename S> using QueueType = PriorityQueue<T, S>;
