@@ -1,4 +1,6 @@
 
+# MAE-XNT: A Foundation Model for Segmenting Neuronal Tissue Volumes Generated with X-Ray Nanotomography
+
 This repository provides the code used to train MAE-XNT and to fine-tune it on the C432 and XPRESS datasets.
 We provide below the commands to launch to reproduce our results.
 Our experiments has been originally launched using two NVIDIA H200 GPU 141GB, 64 AMD EPYC™ 7543 CPU on Ubuntu 24.04
@@ -17,6 +19,20 @@ To run the container, use:
 ```
 apptainer shell --no-home --nv container_MAE_XNT.sif
 ```
+
+# Obtaining the pre-training Dataset
+
+Here are the publicly released volumes used to train MAE_XNT. There are several volumes per DOI. We will update this list according to the three years embargo policy of ESRF:
+
+- 10.15151/ESRF-ES-433972376
+- 10.15151/ESRF-ES-650704790
+- 10.15151/ESRF-ES-514138492
+- 10.15151/ESRF-ES-754325093
+- 10.15151/ESRF-ES-1050393697
+- 10.15151/ESRF-ES-404475765
+- 10.15151/ESRF-ES-754325379
+
+Training 3D images are the center crop of size 2000^3 of the provided volumes.
 
 # Obtaining MAE-XNT
 
@@ -150,9 +166,15 @@ python3 axon_fine_tuning/inference.py $DATA_DIR $CHECKPOINT_PATH --offset 99 --v
 
 Then you will have to compress it in a zip file and submit it on https://xpress.grand-challenge.org/.
 All the results are saved in the model folder.
+
+# Citation
+
+This paper has been accepted to CVPR26 Findings.
+
 # License
 
 This project is under MIT license
+
 
 
 
